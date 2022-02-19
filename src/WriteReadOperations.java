@@ -1,10 +1,11 @@
+import javax.xml.stream.events.EndDocument;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
 public class WriteReadOperations {
 
-    public static boolean WriteTextToLocation(String location, String text) throws java.io.IOException{
+    public static void WriteTextToLocation(String location, String text) throws java.io.IOException{
 
         FileWriter fileWriter = null;
         try{
@@ -13,27 +14,24 @@ public class WriteReadOperations {
         }finally{
             if(fileWriter != null){
                 fileWriter.close();
-                return true;
-            }
-            else{
-                return false;
             }
         }
     }
-    public static boolean ReadTextFromLocation(String location) throws java.io.IOException{
+    public static void ReadTextFromLocation(String location) throws java.io.IOException{
         BufferedReader fileReader = null;
-        String readText="";
+        String readText="",nextLine="";
         try{
             fileReader = new BufferedReader(new FileReader(location));
-            readText = fileReader.readLine();
+            while(nextLine != null){
+                nextLine = fileReader.readLine();
+                if(nextLine != null){
+                    readText += nextLine + "\n";
+                }
+            }
             System.out.println(readText);
         }finally{
             if(fileReader != null){
                 fileReader.close();
-                return true;
-            }
-            else{
-                return false;
             }
         }
     }
