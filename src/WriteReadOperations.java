@@ -1,7 +1,4 @@
-import javax.xml.stream.events.EndDocument;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 public class WriteReadOperations {
 
@@ -32,6 +29,32 @@ public class WriteReadOperations {
         }finally{
             if(fileReader != null){
                 fileReader.close();
+            }
+        }
+    }
+    public static void WriteBinaryIntegerToLocation(String location, int number) throws IOException {
+
+        DataOutputStream outputStream = null;
+        try {
+            outputStream = new DataOutputStream(new FileOutputStream(location));
+            outputStream.writeInt(number);
+        }finally{
+            if(outputStream!=null){
+                outputStream.close();
+            }
+        }
+    }
+    public static void ReadBinaryIntegerFromLocation(String location) throws IOException {
+
+        DataInputStream inputStream = null;
+        int readNumber;
+        try {
+            inputStream = new DataInputStream(new FileInputStream(location));
+            readNumber=inputStream.readInt();
+            System.out.println(readNumber);
+        }finally{
+            if(inputStream!=null){
+                inputStream.close();
             }
         }
     }
